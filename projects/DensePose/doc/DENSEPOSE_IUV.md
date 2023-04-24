@@ -46,7 +46,7 @@ target domain predictions quality.</p>
 
 ### Legacy Models
 
-Baselines trained using schedules from [Güler et al, 2018](https://arxiv.org/pdf/1802.00434.pdf)
+Güler et al, 2018]のスケジュールを用いてトレーニングしたベースライン(https://arxiv.org/pdf/1802.00434.pdf)
 
 <table><tbody>
 <!-- START TABLE -->
@@ -93,7 +93,7 @@ Baselines trained using schedules from [Güler et al, 2018](https://arxiv.org/pd
 
 ### Improved Baselines, Original Fully Convolutional Head
 
-These models use an improved training schedule and Panoptic FPN head from [Kirillov et al, 2019](https://arxiv.org/abs/1901.02446).
+これらのモデルは、[Kirillov et al, 2019](https://arxiv.org/abs/1901.02446)の改良された学習スケジュールとPanoptic FPN headを使用しています。
 
 <table><tbody>
 <!-- START TABLE -->
@@ -140,7 +140,7 @@ These models use an improved training schedule and Panoptic FPN head from [Kiril
 
 ### <a name="ModelZooDeepLabV3"> Improved Baselines, DeepLabV3 Head
 
-These models use an improved training schedule, Panoptic FPN head from [Kirillov et al, 2019](https://arxiv.org/abs/1901.02446) and DeepLabV3 head from [Chen et al, 2017](https://arxiv.org/abs/1706.05587).
+これらのモデルは、改良された学習スケジュール、[Kirillov et al, 2019](https://arxiv.org/abs/1901.02446)のPanoptic FPN head、[Chen et al, 2017](https://arxiv.org/abs/1706.05587)のDeepLabV3 headを用いています。
 
 <table><tbody>
 <!-- START TABLE -->
@@ -187,7 +187,7 @@ These models use an improved training schedule, Panoptic FPN head from [Kirillov
 
 ### <a name="ModelZooConfidence"> Baselines with Confidence Estimation
 
-These models perform additional estimation of confidence in regressed UV coodrinates, along the lines of [Neverova et al., 2019](https://papers.nips.cc/paper/8378-correlated-uncertainty-for-learning-dense-correspondences-from-noisy-labels).
+これらのモデルは、[Neverova et al., 2019](https://papers.nips.cc/paper/8378-correlated-uncertainty-for-learning-dense-correspondences-from-noisy-labels)の線に沿って、回帰されたUVクードリネートの信頼度の追加推定を実行します。
 
 <table><tbody>
 <!-- START TABLE -->
@@ -310,17 +310,17 @@ These models perform additional estimation of confidence in regressed UV coodrin
 </tr>
 </tbody></table>
 
-Acronyms:
+頭文字をとったもの：
 
-`WC1`: with confidence estimation model type 1 for `U` and `V`
+WC1`: `U`と`V`の信頼度推定モデルタイプ1付き
 
-`WC2`: with confidence estimation model type 2 for `U` and `V`
+WC2`: `U` と `V` の信頼度推定モデルタイプ 2 を使用する。
 
-### <a name="ModelZooMaskConfidence"> Baselines with Mask Confidence Estimation
+### <a name="ModelZooMaskConfidence"> マスクの信頼度推定を行うベースライン
 
-Models that perform estimation of confidence in regressed UV coodrinates
-as well as confidences associated with coarse and fine segmentation,
-see [Sanakoyeu et al., 2020](https://arxiv.org/pdf/2003.00080.pdf) for details.
+UVクードリネートを回帰した信頼度の推定を行うモデル
+と、粗いセグメンテーションと細かいセグメンテーションに関連するコンフィデンス（信頼度）である、
+詳細は[Sanakoyeu et al., 2020](https://arxiv.org/pdf/2003.00080.pdf)をご参照ください。
 
 <table><tbody>
 <!-- START TABLE -->
@@ -443,18 +443,14 @@ see [Sanakoyeu et al., 2020](https://arxiv.org/pdf/2003.00080.pdf) for details.
 </tr>
 </tbody></table>
 
-Acronyms:
+略語:
 
-`WC1M`: with confidence estimation model type 1 for `U` and `V` and mask confidence estimation
+WC1M: U および V の信頼度推定モデルタイプ1とマスク信頼度推定を含む
 
-`WC2M`: with confidence estimation model type 2 for `U` and `V` and mask confidence estimation
+WC2M: U および V の信頼度推定モデルタイプ2とマスク信頼度推定を含む
 
-### <a name="ModelZooBootstrap"></a> Bootstrapping Baselines
-
-Master and student models trained using the bootstrapping pipeline with chimpanzee as the target category,
-see [Sanakoyeu et al., 2020](https://arxiv.org/pdf/2003.00080.pdf)
-and [Bootstrapping Pipeline](BOOTSTRAPPING_PIPELINE.md) for details.
-Evaluation is performed on [DensePose Chimps](DENSEPOSE_DATASETS.md#densepose-chimps) dataset.
+<a name="ModelZooBootstrap"></a> ブートストラップ基準
+チンパンジーをターゲットカテゴリとして使用してブートストラップパイプラインを使用してトレーニングされたマスターモデルとスチューデントモデルは、Sanakoyeu et al., 2020 およびBootstrapping Pipelineを参照してください。評価はDensePose Chimpsデータセットで実行されます。
 
 <table><tbody>
 <!-- START TABLE -->
@@ -547,21 +543,17 @@ P_CA/217578784/metrics.json">metrics</a></td>
 
 Acronyms:
 
-`WC1M`: with confidence estimation model type 1 for `U` and `V` and mask confidence estimation
+WC1M`: `U`と`V`の信頼度推定モデルタイプ1とマスク信頼度推定を使用する。
 
-`Atop10P`: humans and animals from the 10 best suitable categories are used for training
+Atop10P`：最適な10個のカテゴリーから選ばれたヒトと動物がトレーニングに使用される
 
-`CA`: class agnostic training, where all annotated instances are mapped into a single category
+CA`: クラスにとらわれないトレーニング。アノテーションされたインスタンスはすべて1つのカテゴリにマッピングされる。
 
-`B_<...>`: schedule with bootstrapping with the specified results sampling strategy
+B_<...>`：指定した結果のサンプリング戦略でブートストラップによるスケジュールを組む
 
-Note:
+ノートです：
 
-The relaxed `dp. APex GPS` metric was used in
-[Sanakoyeu et al., 2020](https://arxiv.org/pdf/2003.00080.pdf) to evaluate DensePose
-results. This metric considers matches at thresholds 0.2, 0.3 and 0.4 additionally
-to the standard ones used in the evaluation protocol. The minimum threshold is
-controlled by `DENSEPOSE_EVALUATION.MIN_IOU_THRESHOLD` config option.
+リラックスした`dp. APex GPS` メトリックは [Sanakoyeu et al., 2020](https://arxiv.org/pdf/2003.00080.pdf) で DensePose の結果を評価するために使用されました。このメトリックは、評価プロトコルで使用される標準的なものに加えて、閾値0.2、0.3、0.4でのマッチを考慮します。最小の閾値は `DENSEPOSE_EVALUATION.MIN_IOU_THRESHOLD` 設定オプションで制御します。
 
 ### License
 
