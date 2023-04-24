@@ -2,29 +2,20 @@
 
 ## <a name="Overview"></a> Overview
 
-The goal of chart-based DensePose methods is to establish dense correspondences
-between image pixels and 3D object mesh by splitting the latter into charts and estimating
-for each pixel the corresponding chart index `I` and local chart coordinates `(U, V)`.
+人間や動物のためのチャートベースのDensePose推定におけるチャートベースの方法の目的は、物体をチャートに分割し、各ピクセルの対応するチャートインデックス I と局所チャート座標 (U, V) を推定することによって、画像ピクセルと3Dオブジェクトメッシュの間に密な対応関係を確立することです。
 
 <div align="center">
   <img src="https://dl.fbaipublicfiles.com/densepose/web/densepose_teaser_compressed_25.gif" width="700px" />
 </div>
 
-The charts used for human DensePose estimation are shown in Figure 1.
-The human body is split into 24 parts, each part is parametrized by `U` and `V`
-coordinates, each taking values in `[0, 1]`.
+人間のDensePose推定に使用されるチャートは図1に示されています。人体は24の部位に分割され、それぞれの部位は U と V 座標によってパラメータ化され、各座標は [0, 1] の値を取ります。
 
 <div align="center">
   <img src="https://dl.fbaipublicfiles.com/densepose/web/coords.png" width="400px" />
 </div>
 <p class="image-caption"><b>Figure 1.</b> Partitioning and parametrization of human body surface.</p>
 
-The pipeline uses [Faster R-CNN](https://arxiv.org/abs/1506.01497)
-with [Feature Pyramid Network](https://arxiv.org/abs/1612.03144) meta architecture
-outlined in Figure 2. For each detected object, the model predicts
-its coarse segmentation `S` (2 or 15 channels: foreground / background or
-background + 14 predefined body parts), fine segmentation `I` (25 channels:
-background + 24 predefined body parts) and local chart coordinates `U` and `V`.
+パイプラインは、図2に概要が示されている特徴ピラミッドネットワークを使用したFaster R-CNNを使用します。各検出されたオブジェクトについて、モデルは、その粗いセグメンテーション S（前景/背景または背景+14の定義済みのボディパーツを持つ2または15チャンネル）、細分割 I（背景+24の定義済みのボディパーツを持つ25チャンネル）とローカルチャート座標 U と V を予測します。
 
 <div align="center">
   <img src="https://dl.fbaipublicfiles.com/densepose/web/densepose_pipeline_iuv.png" width="500px" />
@@ -33,21 +24,9 @@ background + 24 predefined body parts) and local chart coordinates `U` and `V`.
 
 ### <a name="Bootstrap"></a> Bootstrapping Chart-Based Models
 
-[Sanakoyeu et al., 2020](https://arxiv.org/pdf/2003.00080.pdf) introduced a pipeline
-to transfer DensePose models trained on humans to proximal animal classes (chimpanzees),
-which is summarized in Figure 3. The training proceeds in two stages:
+[Sanakoyeu et al.、2020]は、チンパンジーなどの近接動物クラスに対して人間でトレーニングされたDensePoseモデルを転送するパイプラインを紹介しました。トレーニングは、2つのステージで行われます。最初に、ソースドメイン（完全なDensePose注釈 S、I、U、および V を持つ人間）とサポートドメイン（セグメンテーション注釈のみを持つ動物）からデータを取得してマスターモデルがトレーニングされます。選択された動物クラスは、ターゲットドメインの結果の品質を保証するためにカテゴリフィルタを介して選択されます。トレーニングはクラス非依存の方法で行われ、すべての選択されたカテゴリが単一のカテゴリ（人間）にマップされます。
 
-First, a *master* model is trained on data from source domain (humans with full
-DensePose annotation `S`, `I`, `U` and `V`)
-and supporting domain (animals with segmentation annotation only).
-Only selected animal classes are chosen from the supporting
-domain through *category filters* to guarantee the quality of target domain results.
-The training is done in *class-agnostic manner*: all selected categories are mapped
-to a single category (human).
-
-Second, a *student* model is trained on data from source and supporting domains,
-as well as data from target domain obtained by applying the master model, selecting
-high-confidence detections and sampling the results.
+次に、スチューデントモデルが、マスターモデルを適用して得られたターゲットドメインのデータ、高信頼度の検出を選択し、結果をサンプリングして、ソースおよびサポートドメインからのデータと組み合わせてトレーニングされます。
 
 <div align="center">
   <img src="https://dl.fbaipublicfiles.com/densepose/web/densepose_pipeline_bootstrap_iuv.png" width="1000px" />
@@ -57,13 +36,11 @@ supporting domains to produce predictions in target domain; <i>student</i> model
 supporting domains, as well as sampled predictions from the master model on target domain to improve
 target domain predictions quality.</p>
 
-Examples of pretrained master and student models are available in the [Model Zoo](#ModelZooBootstrap).
-For more details on the bootstrapping pipeline, please see [Bootstrapping Pipeline](BOOTSTRAPPING_PIPELINE.md).
+事前にトレーニングされたマスターおよびスチューデントモデルの例は、Model Zooで入手できます。
 
 ### Datasets
 
-For more details on datasets used for chart-based model training and validation,
-please refer to the [DensePose Datasets](DENSEPOSE_DATASETS.md) page.
+チャートベースのモデルのトレーニングと検証に使用されるデータセットの詳細については、DensePose Datasetsページを参照してください。
 
 ## <a name="ModelZoo"></a> Model Zoo and Baselines
 
